@@ -11,9 +11,9 @@ public class JavaInterfaceTest {
 			
 		};
 		
-		fi.doFunction(); // How this line valid ?
 		fi.doInternal();
-		
+//		fi.doFunction(); // How this line valid ?
+
 		FunctionalIntf.doSomething();
 		
 	}

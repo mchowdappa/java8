@@ -30,7 +30,8 @@ public class Java8ForEachTest {
 		// Traversing using forEach() method
 		System.out.println("\nUsing forEach():");
 
-		list.forEach(new MyConsumer(25));
+		Consumer<? super Integer> after = new MyConsumer2();
+		list.forEach(new MyConsumer(25).andThen(after));
 	}
 
 }
@@ -106,9 +107,10 @@ class MyConsumer2 implements Consumer<Number>{
 }
 
 
-class MyConsumer implements Consumer<Integer> {
+@SuppressWarnings("hiding")
+class MyConsumer<Integer> implements Consumer<Integer> {
 
-	public MyConsumer(int num) {
+	public MyConsumer(Integer num) {
 		this.num = num;
 	}
 	private Integer num;
@@ -117,6 +119,7 @@ class MyConsumer implements Consumer<Integer> {
 		System.out.println("IN accept():"+ t);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Consumer<Integer> andThen(Consumer<? super Integer> after) {
 		System.out.println("IN andThen():");
